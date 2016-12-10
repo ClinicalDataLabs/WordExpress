@@ -3,8 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  InteractionManager
+  ListView,
+  TouchableOpacity
 } from 'react-native';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
@@ -12,15 +12,28 @@ import gql from 'graphql-tag';
 const AllStoriesQuery = gql`query AllStories { posts { id post_title } }`;
 
 class Home extends Component {
-  selectStory(postId) {
-    InteractionManager.runAfterInteractions(() => {
-      this.props.navigator.push({
-        id: 'STORY',
-        passProps: {
-          id: postId
-        }
-      });
+  constructor() {
+    super();
+    this.ds = new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2
     });
+  }
+  selectStory(postId) {
+    this.props.navigator.push({
+      id: 'STORY',
+      passProps: {
+        id: postId
+      }
+    });
+  }
+  renderRow(post, sectionId, rowId) {
+    return (
+      <TouchableOpacity key={post.id} onPress={() => this.selectStory(post.id)}>
+        <Text style={styles.headline}>
+        {post.post_title}
+        </Text>
+      </TouchableOpacity>
+    );
   }
   render() {
     if (this.props.data.loading) {
@@ -29,16 +42,19 @@ class Home extends Component {
     if (this.props.data.error) {
       throw this.props.data.error;
     }
+    let dataSource = this.ds.cloneWithRows(this.props.data.posts);
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Unvoter News
         </Text>
-        {this.props.data.posts.map(post => <TouchableOpacity key={post.id} onPress={() => this.selectStory(post.id)}>
-          <Text style={styles.headline}>
-            {post.post_title}
-            </Text>
-          </TouchableOpacity>)}
+        <ListView
+          renderHeader={() => null}
+          renderRow={this.renderRow.bind(this)}
+          dataSource={dataSource}
+          automaticallyAdjustContentInsets={false}
+          enableEmptySections={true}
+        />
       </View>
     );
   }

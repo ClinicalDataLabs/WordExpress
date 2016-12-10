@@ -3,10 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  WebView
+  WebView,
+  TouchableOpacity
 } from 'react-native';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
+import postContentUtility from '../services/postContentUtility';
 
 const StoryQuery = gql`query getPost($id: Int!) {
   post(id:$id) {
@@ -17,8 +19,8 @@ const StoryQuery = gql`query getPost($id: Int!) {
 }`;
 
 class Story extends Component {
-  selectStory() {
-
+  back() {
+    this.props.navigator.pop();
   }
   render() {
     if (this.props.data.loading) {
@@ -27,16 +29,35 @@ class Story extends Component {
     if (this.props.data.error) {
       throw this.props.data.error;
     }
+    let rawContent = `${this.props.data.post.post_content}`;
+    let parsedContent = postContentUtility.parsePostContent(rawContent);
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Unvoter News
         </Text>
-        <Text style={styles.title}>
+        <TouchableOpacity
+          style={{marginBottom: 5}}
+          onPress={this.back.bind(this)}>
+          <Text>Back</Text>
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: 36,
+            fontWeight: 'bold',
+            backgroundColor: '#000',
+            color: '#fff',
+            padding: 10
+          }}>
           {this.props.data.post.post_title}
         </Text>
         <WebView
-          source={{html: this.props.data.post.post_content}}
+          style={{
+            marginLeft: -5,
+            backgroundColor: 'transparent'
+          }}
+          contentInset={{top: 0, left: 0, bottom: 0, right: 0}}
+          source={{html: parsedContent}}
         />
       </View>
     );
