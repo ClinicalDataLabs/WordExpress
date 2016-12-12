@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   WebView,
@@ -9,8 +8,9 @@ import {
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import postContentUtility from '../services/postContentUtility';
+import AppStyleSheet from '../styles/AppStyleSheet';
 
-const StoryQuery = gql`query getPost($id: Int!) {
+const PostQuery = gql`query getPost($id: Int!) {
   post(id:$id) {
     id
     post_title
@@ -18,44 +18,31 @@ const StoryQuery = gql`query getPost($id: Int!) {
   }
 }`;
 
-class Story extends Component {
+class Post extends Component {
   back() {
     this.props.navigator.pop();
   }
   render() {
     if (this.props.data.loading) {
-      return <Text>Loading...</Text>;
-    }
-    if (this.props.data.error) {
-      throw this.props.data.error;
+      return <Text style={styles.loading}>Loading...</Text>;
     }
     let rawContent = `${this.props.data.post.post_content}`;
     let parsedContent = postContentUtility.parsePostContent(rawContent);
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Unvoter News
-        </Text>
         <TouchableOpacity
-          style={{marginBottom: 5}}
+          style={styles.backButton}
           onPress={this.back.bind(this)}>
-          <Text>Back</Text>
+          <Text style={styles.backButtonText}>
+            {'< Back'}
+          </Text>
         </TouchableOpacity>
         <Text
-          style={{
-            fontSize: 36,
-            fontWeight: 'bold',
-            backgroundColor: '#000',
-            color: '#fff',
-            padding: 10
-          }}>
+          style={styles.postTitle}>
           {this.props.data.post.post_title}
         </Text>
         <WebView
-          style={{
-            marginLeft: -5,
-            backgroundColor: 'transparent'
-          }}
+          style={styles.postContent}
           contentInset={{top: 0, left: 0, bottom: 0, right: 0}}
           source={{html: parsedContent}}
         />
@@ -64,28 +51,32 @@ class Story extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-    padding: 10
-  },
-  title: {
-    fontSize: 16,
+const styles = AppStyleSheet.create({
+  postTitle: {
+    fontSize: 36,
     fontWeight: 'bold',
-    marginTop: 10,
+    backgroundColor: '#000',
+    color: '#fff',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     marginBottom: 10
   },
-  content: {
+  postContent: {
+    backgroundColor: 'transparent'
+  },
+  backButton: {
+    backgroundColor: '#ddd'
+  },
+  backButtonText: {
+    paddingBottom: 5,
+    paddingTop: 5,
+    paddingLeft: 10
   }
 });
 
 export default graphql(
-  StoryQuery,
+  PostQuery,
   ({id}) => ({variables: {id: id}})
-)(Story);
+)(Post);

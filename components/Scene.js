@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {Navigator} from 'react-native';
+import {Navigator, StatusBar, View, Platform} from 'react-native';
 import Home from './Home';
-import Story from './Story';
+import Post from './Post';
+import AppStyleSheet from '../styles/AppStyleSheet';
 
 class Scene extends Component {
   renderScene(route, navigator) {
     switch (route.id) {
-      case 'STORY':
-        return <Story
+      case 'POST':
+        return <Post
           navigator={navigator}
           {...route.passProps}
         />;
@@ -21,12 +22,28 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Navigator
-        initialRoute={{title: 'HOME', index: 0}}
-        renderScene={this.renderScene.bind(this)}
-      />
+      <View style={styles.scene}>
+        <Navigator
+          initialRoute={{title: 'HOME', index: 0}}
+          renderScene={this.renderScene.bind(this)}
+        />
+      </View>
     );
   }
 }
+
+const styles = AppStyleSheet.create({
+  scene: {
+    flex: 1,
+    ...Platform.select({
+      android: {
+        marginTop: StatusBar.currentHeight
+      },
+      ios: {
+        marginTop: 20
+      }
+    })
+  }
+});
 
 export default Scene;
