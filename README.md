@@ -2,7 +2,7 @@
 
 This project aims to replace PHP with Javascript in WordPress development by using Node.js and Express to consume data from a WordPress database using GraphQL. It uses [Apollo](http://apollostack.com) to fetch the data and deliver it into React components. **This repo is the codebase for [wordexpress.io](http://wordexpress.io), where I will write articles and documentation explaining how it works**.
 
-The core of this project revolves around setting up a connection to a WordPress database using Sequelize, defining models from that connection, and then querying those models using GraphQL. It's delivered through an npm package called WordExpress Schema. [Read the documentation](https://github.com/ramsaylanier/wordexpress-schema) for implementation details and information on how to extend it. 
+The core of this project revolves around setting up a connection to a WordPress database using Sequelize, defining models from that connection, and then querying those models using GraphQL. It's delivered through an npm package called WordExpress Schema. [Read the documentation](https://github.com/ramsaylanier/wordexpress-schema) for implementation details and information on how to extend it.
 
 I've also started creating a set of [WordExpress Components](https://github.com/ramsaylanier/WordExpressComponents) that contain GraphQL qeuries based on the WordExpress Schema package. Refer to that repo for documentation.  
 
@@ -104,4 +104,38 @@ This project started out as just an experiment, but it seems like a lot of other
 
 3) Work on developing more complex queries. The WordExpressDatabase object is currently expandable, meaning after importing the default from `wordexpress-schema` you can add Sequel models and queries to it before passing it into WordExpressGraphQLSchema. However, WordExpressGraphQLSchema is **not** expandable. This should be a thing.
 
-4) ~~Figuring out how to get WordPress shortcodes to work. I'd only expect that built in WordPress shortcodes would work (i.e `[caption]`, but they don't currently. It would require parsing the post_content field and then recognizing short codes and then probably building a unique React component for each shortcode.~~ Currently only a few shortcodes work. I've got Caption working, as well as the ability to embed Github Gists. 
+4) ~~Figuring out how to get WordPress shortcodes to work. I'd only expect that built in WordPress shortcodes would work (i.e `[caption]`, but they don't currently. It would require parsing the post_content field and then recognizing short codes and then probably building a unique React component for each shortcode.~~ Currently only a few shortcodes work. I've got Caption working, as well as the ability to embed Github Gists.
+
+## Development
+
+Below are instructions to set up a development environment using Docker, Foreman and Yarn.
+
+#### Setup
+
+1. Install [Foreman](http://blog.daviddollar.org/2011/05/06/introducing-foreman.html)
+2. Install [Docker](https://docs.docker.com/docker-for-mac/)
+3. Install [Yarn](https://yarnpkg.com/en/docs/install)
+
+#### Running WordExpress
+
+```bash
+foreman start
+```
+
+This will start your Wordpress (localhost:5500) and MySQL (localhost:3306) docker instance using docker-compose and also start WordExpress.
+
+#### Set Up Wordpress
+
+1. Visit ```http://localhost:5500```.
+2. Fill out the form and follow the prompts to create a Wordpress instance.
+3. Download the WordExpress Plugin: ```https://github.com/ramsaylanier/WordExpress-Plugin/archive/master.zip```.
+3. Visit ```http://localhost:5500/wp-admin/plugin-install.php``` to upload and install the plugin.
+4. Add test posts: ```http://localhost:5500/wp-admin/edit.php```
+
+#### GraphQL
+
+Visit ```http://localhost:8080``` to access the GraphiQL tool. There's also a nice standalone (GraphiQL Mac app)[https://github.com/skevy/graphiql-app].
+
+#### Wordpress Database
+
+You can access the Wordpress MySQL database at ```http://localhost:3306```

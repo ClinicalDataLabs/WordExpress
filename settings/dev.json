@@ -1,14 +1,14 @@
 {
   "public": {
-    "uploads": "http://wordexpress.s3.amazonaws.com/",
+    "uploads": "http://unvoternews.s3.amazonaws.com/",
     "amazonS3": true
   },
   "private": {
     "wp_prefix": "wp_",
     "database": {
-      "name": "wpexpress_dev",
+      "name": "unvoternews",
       "username": "root",
-      "password": "",
+      "password": "root",
       "host": "127.0.0.1"
     }
   }
