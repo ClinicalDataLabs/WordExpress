@@ -116,22 +116,22 @@ This project started out as just an experiment, but it seems like a lot of other
 
 #### Build and Run WordExpress
 
-Build the app:
+Build:
 
 ```bash
 yarn
 ```
 
-Start Wordpress and MySQL as docker instances using docker-compose and also start WordExpress on the host machine.
+Use Foreman to start WordPress and MySQL as docker instances using docker-compose and also start WordExpress on the host machine.
 
 ```bash
 foreman start
 ```
 
-#### Set Up Wordpress
+#### Set Up WordPress
 
 1. Visit ```http://localhost:5500```.
-2. Follow the instructions to initialize a Wordpress instance.
+2. Follow the instructions to initialize a WordPress instance.
 3. Download the WordExpress Plugin: ```https://github.com/ramsaylanier/WordExpress-Plugin/archive/master.zip```.
 3. Visit ```http://localhost:5500/wp-admin/plugin-install.php``` to upload and install the plugin.
 4. Add test posts: ```http://localhost:5500/wp-admin/edit.php```
@@ -140,6 +140,6 @@ foreman start
 
 Visit ```http://localhost:8080``` to access the GraphiQL tool. There's also a nice standalone [GraphiQL Mac app](https://github.com/skevy/graphiql-app).
 
-#### Wordpress Database
+#### WordPress Database
 
-Use your favorite MySQL client to access the Wordpress MySQL database at ```http://localhost:3306``` using the credentials in ```settings/dev.json```.
+Use your favorite MySQL client to access the WordPress MySQL database at ```http://localhost:3306``` using the credentials in ```settings/dev.json```.
