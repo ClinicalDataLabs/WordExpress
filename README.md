@@ -130,15 +130,15 @@ foreman start
 
 #### Set Up WordPress
 
-1. Visit ```http://localhost:5500```.
+1. Visit http://localhost:5500.
 2. Follow the instructions to initialize a WordPress instance.
-3. Download the WordExpress Plugin: ```https://github.com/ramsaylanier/WordExpress-Plugin/archive/master.zip```.
-3. Visit ```http://localhost:5500/wp-admin/plugin-install.php``` to upload and install the plugin.
-4. Add test posts: ```http://localhost:5500/wp-admin/edit.php```
+3. Download the WordExpress Plugin: https://github.com/ramsaylanier/WordExpress-Plugin/archive/master.zip.
+3. Visit http://localhost:5500/wp-admin/plugin-install.php to upload and install the plugin.
+4. Add test posts: http://localhost:5500/wp-admin/edit.php
 
 #### GraphQL
 
-Visit ```http://localhost:8080``` to access the GraphiQL tool. There's also a nice standalone [GraphiQL Mac app](https://github.com/skevy/graphiql-app).
+Visit http://localhost:8080 to access the GraphiQL tool. There's also a nice standalone [GraphiQL Mac app](https://github.com/skevy/graphiql-app).
 
 #### WordPress Database
 
