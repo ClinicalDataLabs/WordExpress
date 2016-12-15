@@ -108,34 +108,38 @@ This project started out as just an experiment, but it seems like a lot of other
 
 ## Development
 
-Below are instructions to set up a development environment using Docker, Foreman and Yarn.
-
 #### Setup
 
 1. Install [Foreman](http://blog.daviddollar.org/2011/05/06/introducing-foreman.html)
 2. Install [Docker](https://docs.docker.com/docker-for-mac/)
 3. Install [Yarn](https://yarnpkg.com/en/docs/install)
 
-#### Running WordExpress
+#### Build and Run WordExpress
+
+Build the app:
+
+```bash
+yarn
+```
+
+Start Wordpress and MySQL as docker instances using docker-compose and also start WordExpress on the host machine.
 
 ```bash
 foreman start
 ```
 
-This will start your Wordpress (localhost:5500) and MySQL (localhost:3306) docker instance using docker-compose and also start WordExpress.
-
 #### Set Up Wordpress
 
 1. Visit ```http://localhost:5500```.
-2. Fill out the form and follow the prompts to create a Wordpress instance.
+2. Follow the instructions to initialize a Wordpress instance.
 3. Download the WordExpress Plugin: ```https://github.com/ramsaylanier/WordExpress-Plugin/archive/master.zip```.
 3. Visit ```http://localhost:5500/wp-admin/plugin-install.php``` to upload and install the plugin.
 4. Add test posts: ```http://localhost:5500/wp-admin/edit.php```
 
 #### GraphQL
 
-Visit ```http://localhost:8080``` to access the GraphiQL tool. There's also a nice standalone (GraphiQL Mac app)[https://github.com/skevy/graphiql-app].
+Visit ```http://localhost:8080``` to access the GraphiQL tool. There's also a nice standalone [GraphiQL Mac app](https://github.com/skevy/graphiql-app).
 
 #### Wordpress Database
 
-You can access the Wordpress MySQL database at ```http://localhost:3306```
+Use your favorite MySQL client to access the Wordpress MySQL database at ```http://localhost:3306``` using the credentials in ```settings/dev.json```.
