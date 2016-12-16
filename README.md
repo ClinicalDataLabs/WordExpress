@@ -135,6 +135,7 @@ foreman start
 3. Download the WordExpress Plugin at https://github.com/ramsaylanier/WordExpress-Plugin/archive/master.zip.
 3. Visit [http://localhost:5500/wp-admin/plugin-install.php](http://localhost:5500/wp-admin/plugin-install.php) to upload and install the plugin.
 4. Add test posts: [http://localhost:5500/wp-admin/edit.php](http://localhost:5500/wp-admin/edit.php)
+5. Set up categories: [http://localhost:5500/wp-admin/edit-tags.php?taxonomy=category](http://localhost:5500/wp-admin/edit-tags.php?taxonomy=category).
 
 #### GraphQL
 
