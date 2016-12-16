@@ -149,7 +149,7 @@ Use your favorite MySQL client to access the WordPress MySQL database at ```http
 
 By default, the ```wordexpress-schema``` dependency uses the version from NPM. However, when developing you want to use the ClinicalDataLabs fork locally. Here are the steps:
 
-First, clone ```wordexpress-schema``` locally and install.
+First, clone ```wordexpress-schema``` locally and install dependencies:
 ```bash
 git clone git@github.com:ClinicalDataLabs/WordExpressSchema.git
 cd WordExpressSchema
@@ -164,7 +164,9 @@ yarn link
 
 Change to the WordExpress directory:
 
-```yarn link wordexpress-schema```
+```bash
+yarn link wordexpress-schema
+```
 
 Now ```node_modules/wordexpress-schema``` is a symlink to the local repo.
 
@@ -174,4 +176,4 @@ However, before you can use the local module, you must build it. From the WordEx
 yarn build
 ```
 
-IMPORTANT: Every time you make a change to the ```wordexpress-schema```, you will have to build and then restart ```wordexpress```. (TODO: automate this)
+IMPORTANT: Every time you make a change to the ```wordexpress-schema```, you will have to build and then restart ```wordexpress```. (TODO: Automate this.)
