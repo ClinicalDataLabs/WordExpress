@@ -116,7 +116,7 @@ This project started out as just an experiment, but it seems like a lot of other
 
 #### Build and Run WordExpress
 
-Build:
+Install dependencies:
 
 ```bash
 yarn
