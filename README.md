@@ -180,6 +180,6 @@ IMPORTANT: Every time you make a change to the ```wordexpress-schema```, you wil
 
 ## FAQS
 
-Q.) I ran forman start and unable to access  localhost:5500 for the mysql database.
+Q.) I ran foreman start and unable to access  localhost:5500 for the mysql database.
 
   A.) Update the host propertie in WordExpress/settings/dev.json file with the ip docker-machine created. 
