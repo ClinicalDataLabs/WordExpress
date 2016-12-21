@@ -47,11 +47,11 @@ class Posts extends Component {
     return (
       <TouchableOpacity key={post.id}
         onPress={() => this.selectPost(post.id)}
-        style={styles.postRow}>
+        style={[styles.navRow, styles.postRow]}>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{flexDirection: 'column'}}>
+          <View style={{flex: 1, flexDirection: 'column'}}>
             <Text
-              style={styles.postHeadline}
+              style={styles.navHeadline}
               numberOfLines={1}>
               {post.post_title}
             </Text>
@@ -95,23 +95,7 @@ class Posts extends Component {
 }
 
 const styles = AppStyleSheet.create({
-  postHeadline: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    flex: 1
-  },
-  disclosureIcon: {
-    fontSize: 24,
-    color: '#aaa',
-    textAlign: 'right'
-  },
   postRow: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#ccc',
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 10,
-    paddingRight: 10,
     height: 60
   }
 });

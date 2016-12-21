@@ -41,10 +41,10 @@ class Categories extends Component {
     return (
       <TouchableOpacity key={category.id}
         onPress={() => this.selectCategory(category)}
-        style={styles.categoryRow}>
+        style={styles.navRow}>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <Text
-            style={styles.categoryName}
+            style={styles.navHeadline}
             numberOfLines={1}>
             {category.name}
           </Text>
@@ -73,24 +73,11 @@ class Categories extends Component {
 }
 
 const styles = AppStyleSheet.create({
-  categoryName: {
+  navHeadline: {
     fontWeight: 'bold',
+    color: '#000',
     fontSize: 18,
     flex: 1
-  },
-  disclosureIcon: {
-    fontSize: 24,
-    color: '#aaa',
-    textAlign: 'right'
-  },
-  categoryRow: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#ccc',
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 10,
-    paddingRight: 10,
-    height: 40
   }
 });
 
