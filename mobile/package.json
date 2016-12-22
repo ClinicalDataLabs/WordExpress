@@ -1,0 +1,28 @@
+{
+	"name": "UnvoterNews",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"test": "jest"
+	},
+	"dependencies": {
+		"apollo-client": "^0.5.18",
+		"graphql-tag": "^1.1.2",
+		"moment-timezone": "^0.5.10",
+		"react": "15.4.1",
+		"react-apollo": "^0.7.1",
+		"react-native": "0.38.0",
+		"react-native-config": "^0.2.1",
+		"react-native-vector-icons": "^3.0.0"
+	},
+	"devDependencies": {
+		"babel-jest": "17.0.2",
+		"babel-preset-react-native": "1.9.0",
+		"jest": "17.0.3",
+		"react-test-renderer": "15.4.1"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
+}
