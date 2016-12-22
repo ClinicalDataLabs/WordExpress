@@ -12,11 +12,11 @@ import Loading from './Loading';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Post} from '../models';
 
-const AllStoriesQuery = gql`query Category($categoryId: Int, $limit: Int) {
+const AllStoriesQuery = gql`query Category($categoryId: Int, $limit: Int, $skip: Int) {
   category(term_id: $categoryId) {
     term_id
     name
-    posts(limit: $limit) {
+    posts(limit: $limit, skip: $skip) {
       id
       post_title
       post_meta(keys: ["publication_date", "source_name"]) {
@@ -75,11 +75,14 @@ class Posts extends Component {
       </TouchableOpacity>
     );
   }
+  tryLoadMore() {
+    return this.props.loadMorePosts();
+  }
   render() {
-    if (this.props.data.loading) {
+    if (this.props.loading) {
       return <Loading />;
     }
-    let dataSource = this.ds.cloneWithRows(this.props.data.category.posts);
+    let dataSource = this.ds.cloneWithRows(this.props.category.posts);
     return (
       <View style={[styles.container, {borderTopWidth: 0.5, borderTopColor: '#ccc'}]}>
         <ListView
@@ -88,6 +91,7 @@ class Posts extends Component {
           dataSource={dataSource}
           automaticallyAdjustContentInsets={false}
           enableEmptySections={true}
+          onEndReached={this.tryLoadMore.bind(this)}
         />
       </View>
     );
@@ -106,7 +110,32 @@ export default graphql(
       return {
         variables: {
           categoryId: categoryId,
-          limit: 20
+          limit: 20,
+          skip: 0
+        }
+      };
+    },
+    props({data: {loading, category, fetchMore}}) {
+      return {
+        loading,
+        category,
+        loadMorePosts: () => {
+          return fetchMore({
+            variables: {
+              skip: category.posts.length
+            },
+            updateQuery: (previousResult, {fetchMoreResult}) => {
+              if (!fetchMoreResult.data) {
+                return previousResult;
+              }
+              let newData = fetchMoreResult.data;
+              newData.category.posts = [
+                ...previousResult.category.posts,
+                ...fetchMoreResult.data.category.posts
+              ];
+              return newData;
+            }
+          });
         }
       };
     }
