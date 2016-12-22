@@ -1,11 +1,25 @@
 import React, {Component} from 'react';
-import {Navigator, Platform} from 'react-native';
+import {Navigator, Platform, View, StatusBar, BackAndroid} from 'react-native';
 import Categories from './Categories';
 import Posts from './Posts';
 import PostComponent from './PostComponent';
 import AppStyleSheet from '../styles/AppStyleSheet';
 
 class Scene extends Component {
+  componentWillMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+  }
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+  handleBackButton() {
+    const {navigator} = this.refs;
+    if (navigator && navigator.getCurrentRoutes().length > 1) {
+      navigator.pop();
+      return true;
+    }
+    return false; // exit the app
+  }
   renderScene(route, navigator) {
     switch (route.id) {
       case 'POST':
@@ -28,12 +42,19 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Navigator
-        style={styles.scene}
-        initialRoute={{title: 'CATEGORIES', index: 0}}
-        renderScene={this.renderScene.bind(this)}
-        configureScene={(route, routeStack) => Navigator.SceneConfigs.HorizontalSwipeJump}
-      />
+      <View style={styles.container}>
+        <StatusBar
+          backgroundColor="#fff"
+          barStyle="dark-content"
+        />
+        <Navigator
+          ref="navigator"
+          style={styles.scene}
+          initialRoute={{title: 'CATEGORIES', index: 0}}
+          renderScene={this.renderScene.bind(this)}
+          configureScene={(route, routeStack) => Navigator.SceneConfigs.HorizontalSwipeJump}
+        />
+      </View>
     );
   }
 }

@@ -125,13 +125,13 @@ export default graphql(
               skip: category.posts.length
             },
             updateQuery: (previousResult, {fetchMoreResult}) => {
-              if (!fetchMoreResult.data) {
+              let newData = fetchMoreResult.data;
+              if (!newData) {
                 return previousResult;
               }
-              let newData = fetchMoreResult.data;
               newData.category.posts = [
                 ...previousResult.category.posts,
-                ...fetchMoreResult.data.category.posts
+                ...newData.category.posts
               ];
               return newData;
             }
