@@ -177,3 +177,9 @@ yarn build
 ```
 
 IMPORTANT: Every time you make a change to the ```wordexpress-schema```, you will have to build and then restart ```wordexpress```. (TODO: Automate this.)
+
+## FAQS
+
+Q.) I ran foreman start and unable to access  localhost:5500 for the mysql database.
+
+  + A.) Update the host property in ./settings/dev.json file with the ip docker-machine created. 
