@@ -44,7 +44,7 @@ class Scene extends Component {
     return (
       <View style={styles.container}>
         <StatusBar
-          backgroundColor="#fff"
+          backgroundColor="#e6e6e6"
           barStyle="dark-content"
         />
         <Navigator
