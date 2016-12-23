@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -16,8 +16,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default () => <View style={styles.loading}>
+const Loading = () => <View style={styles.loading}>
   <Text style={styles.loadingText}>
     Loading...
   </Text>
 </View>;
+
+export default Loading;

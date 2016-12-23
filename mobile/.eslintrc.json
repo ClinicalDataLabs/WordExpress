@@ -1,7 +1,13 @@
 {
-  "extends": ["google", "plugin:react/recommended"],
+  "root": true,
   "parser": "babel-eslint",
-  "plugins": ["react"],
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "google",
+    "plugin:react/recommended"
+  ],
   "rules": {
     "strict": 0,
     "max-len": "off",
@@ -20,7 +26,9 @@
     "no-warning-comments": 0,
     "no-nested-ternary": 0,
     "react/prop-types": 0,
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "comma-dangle": 0,
+    "arrow-parens": [1, "as-needed"]
   },
   "parserOptions": {
     "ecmaFeatures": {
