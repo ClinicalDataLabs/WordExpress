@@ -15,7 +15,6 @@
 		"react": "15.4.1",
 		"react-apollo": "^0.7.1",
 		"react-native": "0.38.0",
-		"react-native-config": "^0.2.1",
 		"react-native-vector-icons": "^3.0.0"
 	},
 	"devDependencies": {

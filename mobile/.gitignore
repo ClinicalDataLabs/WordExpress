@@ -44,4 +44,4 @@ android/app/libs
 
 #Misc
 #
-.env
+env.js
